@@ -14,7 +14,7 @@ export const About: React.FC = () => (
             Founded in 2024, Shroomify started when our founder realized the lack of truly fresh, chemical-free mushrooms in the local market. 
             Most mushrooms travel hundreds of kilometers before reaching the shelf, losing flavor and nutrition.
         </p>
-        <img src="https://picsum.photos/seed/farm_wide/800/400" alt="Our Farm" className="w-full rounded-xl shadow-lg my-8" />
+        <img src="https://images.unsplash.com/photo-1626202377852-c6cb9269550c?auto=format&fit=crop&q=80&w=800" alt="Our Farm" className="w-full rounded-xl shadow-lg my-8" />
         
         <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Farming Method</h3>
         <p className="mb-6">

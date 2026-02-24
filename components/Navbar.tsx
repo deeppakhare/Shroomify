@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart, User, Menu, X, Leaf } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
+import { motion, AnimatePresence } from 'motion/react';
 
 export const Navbar: React.FC = () => {
   const { cart, user, logout } = useShop();
@@ -15,18 +16,35 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex-shrink-0 flex items-center gap-2">
-              <Leaf className="h-8 w-8 text-green-600" />
-              <span className="font-bold text-xl tracking-tight text-stone-800">Shroomify</span>
+            <Link to="/" className="flex-shrink-0 flex items-center gap-2 group">
+              <motion.div
+                whileHover={{ rotate: 20 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Leaf className="h-8 w-8 text-green-600" />
+              </motion.div>
+              <span className="font-bold text-xl tracking-tight text-stone-800 group-hover:text-green-700 transition-colors">Shroomify</span>
             </Link>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className={isActive('/')}>Home</Link>
-            <Link to="/products" className={isActive('/products')}>Shop</Link>
-            <Link to="/blog" className={isActive('/blog')}>Blog</Link>
-            <Link to="/subscription" className={isActive('/subscription')}>Subscribe</Link>
-            <Link to="/bulk" className={isActive('/bulk')}>B2B / Bulk</Link>
+            {[
+              { path: '/', label: 'Home' },
+              { path: '/products', label: 'Shop' },
+              { path: '/blog', label: 'Blog' },
+              { path: '/subscription', label: 'Subscribe' },
+              { path: '/bulk', label: 'B2B / Bulk' },
+            ].map((link) => (
+              <Link key={link.path} to={link.path} className={`relative ${isActive(link.path)}`}>
+                {link.label}
+                {location.pathname === link.path && (
+                  <motion.div 
+                    layoutId="underline"
+                    className="absolute left-0 right-0 -bottom-1 h-0.5 bg-green-600"
+                  />
+                )}
+              </Link>
+            ))}
             
             <div className="flex items-center gap-4 border-l pl-6 border-gray-200">
               {user ? (
@@ -48,26 +66,43 @@ export const Navbar: React.FC = () => {
 
               <Link to="/cart" className="relative text-gray-600 hover:text-green-600">
                 <ShoppingCart size={24} />
+                <AnimatePresence>
                 {cart.length > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  <motion.span 
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                  >
                     {cart.reduce((a, b) => a + b.quantity, 0)}
-                  </span>
+                  </motion.span>
                 )}
+                </AnimatePresence>
               </Link>
             </div>
           </div>
 
           <div className="flex items-center md:hidden">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-600 hover:text-green-600 p-2">
+            <motion.button 
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setIsMenuOpen(!isMenuOpen)} 
+              className="text-gray-600 hover:text-green-600 p-2"
+            >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
+      <AnimatePresence>
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t">
+        <motion.div 
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          className="md:hidden bg-white border-t overflow-hidden"
+        >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link to="/" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-green-50 rounded-md">Home</Link>
             <Link to="/products" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-green-50 rounded-md">Shop</Link>
@@ -80,8 +115,9 @@ export const Navbar: React.FC = () => {
                <Link to="/login" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-green-50 rounded-md">Login</Link>
             )}
           </div>
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </nav>
   );
 };

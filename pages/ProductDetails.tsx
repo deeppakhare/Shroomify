@@ -4,6 +4,7 @@ import { ShoppingCart, ChefHat, Sparkles, Star, Calendar, Clock, Package } from 
 import { useShop } from '../context/ShopContext';
 import { generateRecipe } from '../services/geminiService';
 import ReactMarkdown from 'react-markdown';
+import { motion, AnimatePresence } from 'motion/react';
 
 export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,13 +28,28 @@ export const ProductDetails: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+    >
       <div className="lg:grid lg:grid-cols-2 lg:gap-x-12">
-        <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100 mb-8 lg:mb-0">
+        <motion.div 
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100 mb-8 lg:mb-0"
+        >
           <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col">
+        <motion.div 
+          initial={{ x: 20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="flex flex-col"
+        >
           <div className="flex justify-between items-start">
               <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">{product.name}</h1>
               {product.stock > 0 && product.stock < 20 && (
@@ -68,9 +84,15 @@ export const ProductDetails: React.FC = () => {
                           <button
                             key={tab}
                             onClick={() => setActiveTab(tab as any)}
-                            className={`${activeTab === tab ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm capitalize`}
+                            className={`${activeTab === tab ? 'text-green-600' : 'text-gray-500 hover:text-gray-700'} whitespace-nowrap py-4 px-1 font-medium text-sm capitalize relative`}
                           >
                               {tab === 'desc' ? 'Description' : tab === 'specs' ? 'Specifications' : 'Reviews'}
+                              {activeTab === tab && (
+                                <motion.div 
+                                  layoutId="activeTab"
+                                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-500"
+                                />
+                              )}
                           </button>
                       ))}
                   </nav>
@@ -159,8 +181,8 @@ export const ProductDetails: React.FC = () => {
               <p className="text-sm text-indigo-700">Not sure how to cook this? Our AI chef can suggest quick Indian recipes instantly.</p>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };

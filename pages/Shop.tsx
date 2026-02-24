@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, Filter } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
+import { motion, AnimatePresence } from 'motion/react';
 
 export const Shop: React.FC = () => {
   const { products, addToCart } = useShop();
@@ -17,7 +18,12 @@ export const Shop: React.FC = () => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+    >
       <div className="flex flex-col md:flex-row gap-8">
         
         {/* Filters Sidebar */}
@@ -31,7 +37,7 @@ export const Shop: React.FC = () => {
                     <h3 className="font-medium text-gray-900 mb-3">Category</h3>
                     <div className="space-y-2">
                         {categories.map(cat => (
-                            <label key={cat} className="flex items-center text-gray-600 cursor-pointer hover:text-green-600">
+                            <label key={cat} className="flex items-center text-gray-600 cursor-pointer hover:text-green-600 transition-colors">
                                 <input 
                                     type="radio" 
                                     name="category" 
@@ -48,7 +54,7 @@ export const Shop: React.FC = () => {
 
                 <div>
                     <h3 className="font-medium text-gray-900 mb-3">Availability</h3>
-                    <label className="flex items-center text-gray-600 cursor-pointer hover:text-green-600">
+                    <label className="flex items-center text-gray-600 cursor-pointer hover:text-green-600 transition-colors">
                         <input 
                             type="checkbox" 
                             checked={showInStockOnly}
@@ -73,12 +79,30 @@ export const Shop: React.FC = () => {
                     <p className="text-gray-500">No products match your filters.</p>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <motion.div 
+                  layout
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                    <AnimatePresence>
                     {filteredProducts.map((product) => (
-                    <div key={product.id} className="bg-white border rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col group">
+                    <motion.div 
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.3 }}
+                      key={product.id} 
+                      className="bg-white border rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col group"
+                    >
                         <Link to={`/product/${product.id}`}>
                         <div className="relative h-48 bg-gray-200 overflow-hidden">
-                            <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                            <motion.img 
+                              whileHover={{ scale: 1.1 }}
+                              transition={{ duration: 0.5 }}
+                              src={product.image} 
+                              alt={product.name} 
+                              className="w-full h-full object-cover" 
+                            />
                             {product.stock === 0 ? (
                                 <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
                                     <span className="bg-gray-800 text-white px-3 py-1 font-bold text-sm rounded">OUT OF STOCK</span>
@@ -92,7 +116,7 @@ export const Shop: React.FC = () => {
                         </Link>
                         <div className="p-4 flex-1 flex flex-col">
                         <Link to={`/product/${product.id}`}>
-                            <h3 className="text-lg font-bold text-gray-900 hover:text-green-600">{product.name}</h3>
+                            <h3 className="text-lg font-bold text-gray-900 hover:text-green-600 transition-colors">{product.name}</h3>
                         </Link>
                         <div className="flex items-center gap-2 mt-1 mb-2">
                              <div className="flex text-yellow-500 text-xs">{'★'.repeat(Math.round(product.rating))}</div>
@@ -104,22 +128,24 @@ export const Shop: React.FC = () => {
                                 <span className="text-xl font-bold text-green-700">₹{product.price}</span>
                                 <span className="text-xs text-gray-400 block">{product.category === 'Fresh' ? 'per pack' : 'per unit'}</span>
                             </div>
-                            <button 
+                            <motion.button 
+                            whileTap={{ scale: 0.9 }}
                             onClick={() => addToCart(product)}
                             disabled={product.stock === 0}
                             className={`p-2 rounded-full transition-colors ${product.stock === 0 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700'}`}
                             aria-label="Add to Cart"
                             >
                             <ShoppingBag size={20} />
-                            </button>
+                            </motion.button>
                         </div>
                         </div>
-                    </div>
+                    </motion.div>
                     ))}
-                </div>
+                    </AnimatePresence>
+                </motion.div>
             )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

@@ -8,12 +8,12 @@ export const Admin: React.FC = () => {
   
   // Product Form State
   const [newProduct, setNewProduct] = useState<Partial<Product>>({
-      name: '', price: 0, category: 'Fresh', description: '', nutrition: '', image: 'https://picsum.photos/seed/new/400/300', stock: 0, shelfLife: '5 Days', storage: 'Cool dry place'
+      name: '', price: 0, category: 'Fresh', description: '', nutrition: '', image: 'https://images.unsplash.com/photo-1504285519393-270f23d24227?auto=format&fit=crop&q=80&w=400', stock: 0, shelfLife: '5 Days', storage: 'Cool dry place'
   });
 
   // Blog Form State
   const [newBlog, setNewBlog] = useState<Partial<BlogPost>>({
-      title: '', category: 'Health', image: 'https://picsum.photos/seed/blognew/800/400', excerpt: '', content: '', author: 'Admin'
+      title: '', category: 'Health', image: 'https://images.unsplash.com/photo-1504285519393-270f23d24227?auto=format&fit=crop&q=80&w=400', excerpt: '', content: '', author: 'Admin'
   });
 
   if (!user || user.role !== 'admin') {
@@ -31,7 +31,7 @@ export const Admin: React.FC = () => {
               reviewsList: []
           } as Product);
           alert('Product Added!');
-          setNewProduct({ name: '', price: 0, category: 'Fresh', description: '', nutrition: '', image: 'https://picsum.photos/seed/new/400/300', stock: 0, shelfLife: '', storage: '' });
+          setNewProduct({ name: '', price: 0, category: 'Fresh', description: '', nutrition: '', image: 'https://images.unsplash.com/photo-1504285519393-270f23d24227?auto=format&fit=crop&q=80&w=400', stock: 0, shelfLife: '', storage: '' });
       }
   };
 
@@ -44,7 +44,7 @@ export const Admin: React.FC = () => {
               date: new Date().toISOString().split('T')[0],
           } as BlogPost);
           alert('Blog Post Published!');
-          setNewBlog({ title: '', category: 'Health', image: 'https://picsum.photos/seed/blognew/800/400', excerpt: '', content: '', author: 'Admin' });
+          setNewBlog({ title: '', category: 'Health', image: 'https://images.unsplash.com/photo-1504285519393-270f23d24227?auto=format&fit=crop&q=80&w=400', excerpt: '', content: '', author: 'Admin' });
       }
   };
 
