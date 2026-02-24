@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ShoppingCart, ChefHat, Sparkles, Star, Calendar, Clock, Package } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
-import { generateRecipe } from '../services/geminiService';
 import ReactMarkdown from 'react-markdown';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -20,12 +19,12 @@ export const ProductDetails: React.FC = () => {
     return <div className="p-12 text-center">Product not found. <button onClick={() => navigate('/products')} className="text-green-600 underline">Back to shop</button></div>;
   }
 
-  const handleGetRecipe = async () => {
-    setLoadingRecipe(true);
-    const result = await generateRecipe(product.name);
-    setRecipe(result);
-    setLoadingRecipe(false);
-  };
+  // const handleGetRecipe = async () => {
+  //   setLoadingRecipe(true);
+  //   const result = await generateRecipe(product.name);
+  //   setRecipe(result);
+  //   setLoadingRecipe(false);
+  // };
 
   return (
     <motion.div 
@@ -160,15 +159,6 @@ export const ProductDetails: React.FC = () => {
                 <ChefHat className="text-indigo-600"/> 
                 Need Inspiration?
               </h3>
-              {!recipe && (
-                <button 
-                  onClick={handleGetRecipe}
-                  disabled={loadingRecipe}
-                  className="text-sm flex items-center gap-1 text-white bg-indigo-600 px-3 py-1.5 rounded-full hover:bg-indigo-700 transition disabled:opacity-50"
-                >
-                  {loadingRecipe ? 'Thinking...' : <><Sparkles size={14}/> Ask AI for Recipes</>}
-                </button>
-              )}
             </div>
             
             {recipe && (
