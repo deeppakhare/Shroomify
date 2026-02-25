@@ -43,7 +43,19 @@ export const Login: React.FC = () => {
             </div>
           </div>
 
-          
+          <div className="flex items-center">
+            <input
+              id="admin-check"
+              name="admin-check"
+              type="checkbox"
+              className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+              checked={isAdmin}
+              onChange={(e) => setIsAdmin(e.target.checked)}
+            />
+            <label htmlFor="admin-check" className="ml-2 block text-sm text-gray-900">
+              Log in as Admin (Demo Mode)
+            </label>
+          </div>
 
           <div>
             <button
