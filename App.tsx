@@ -63,9 +63,7 @@ const AnimatedRoutes = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/subscription" element={<Subscription />} />
-        <Route path="/bulk" element={<BulkInquiry />} />
-        <Route path="/legal" element={<Legal />} />
+        
       </Routes>
     </AnimatePresence>
   );
