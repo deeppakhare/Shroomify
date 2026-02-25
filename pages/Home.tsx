@@ -115,9 +115,27 @@ export const Home: React.FC = () => {
             </motion.div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3 text-center">
             {[
-              { icon: <Leaf />, title: "Zero Pesticides", desc: "Grown on sterilized wheat straw substrate in a controlled climate.", color: "green" },
-              { icon: <Truck />, title: "Harvested to Order", desc: "We harvest at 5 AM and deliver by 10 AM. It doesn't get fresher.", color: "amber" },
-              { icon: <Award />, title: "Nutrient Dense", desc: "Rich in protein, fiber, and antioxidants. A perfect meat substitute.", color: "blue" }
+              { 
+                icon: <Leaf />, 
+                title: "Zero Pesticides", 
+                desc: "Grown on sterilized wheat straw substrate in a controlled climate.", 
+                className: "bg-green-50 border-green-100",
+                iconClassName: "text-green-600"
+              },
+              { 
+                icon: <Truck />, 
+                title: "Harvested to Order", 
+                desc: "We harvest at 5 AM and deliver by 10 AM. It doesn't get fresher.", 
+                className: "bg-amber-50 border-amber-100",
+                iconClassName: "text-amber-600"
+              },
+              { 
+                icon: <Award />, 
+                title: "Nutrient Dense", 
+                desc: "Rich in protein, fiber, and antioxidants. A perfect meat substitute.", 
+                className: "bg-blue-50 border-blue-100",
+                iconClassName: "text-blue-600"
+              }
             ].map((benefit, index) => (
               <motion.div 
                 key={index}
@@ -126,9 +144,9 @@ export const Home: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
                 whileHover={{ y: -10 }}
-                className={`p-6 bg-${benefit.color}-50 rounded-xl border border-${benefit.color}-100`}
+                className={`p-6 rounded-xl border ${benefit.className}`}
               >
-                <div className={`mx-auto w-12 h-12 text-${benefit.color}-600 mb-4 bg-white rounded-full flex items-center justify-center shadow-sm`}>
+                <div className={`mx-auto w-12 h-12 mb-4 bg-white rounded-full flex items-center justify-center shadow-sm ${benefit.iconClassName}`}>
                   {benefit.icon}
                 </div>
                 <h3 className="text-lg font-bold text-gray-900">{benefit.title}</h3>
