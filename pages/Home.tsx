@@ -41,7 +41,7 @@ export const Home: React.FC = () => {
             initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.5 }}
             transition={{ duration: 1.5 }}
-            src="https://images.unsplash.com/photo-1622345091669-052d9a42f65a?auto=format&fit=crop&q=80&w=1600" 
+            src="https://i.guim.co.uk/img/media/b9e09f1a5c3050fd2c585994a2c1e71f2745894f/0_523_3762_2258/master/3762.jpg?width=620&dpr=1&s=none&crop=none" 
             alt="Mushroom Farm" 
             className="w-full h-full object-cover"
           />
