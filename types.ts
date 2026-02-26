@@ -36,33 +36,4 @@ export interface User {
   role: 'customer' | 'admin';
 }
 
-export interface Order {
-  id: string;
-  date: string;
-  items: CartItem[];
-  total: number;
-  status: 'Received' | 'Harvested' | 'Packed' | 'Shipped' | 'Delivered';
-  userId: string;
-  deliverySlot?: string;
-  paymentMethod?: string;
-  address?: string;
-}
 
-export interface SubscriptionPlan {
-  id: string;
-  name: string;
-  frequency: 'Weekly' | 'Monthly';
-  price: number;
-  description: string;
-}
-
-export interface BlogPost {
-  id: string;
-  title: string;
-  category: 'Recipes' | 'Health' | 'Farming';
-  image: string;
-  excerpt: string;
-  content: string;
-  date: string;
-  author: string;
-}
