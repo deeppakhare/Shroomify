@@ -13,7 +13,6 @@ import { Dashboard } from './pages/Dashboard';
 import { Admin } from './pages/Admin';
 import { Blog } from './pages/Blog';
 import { About, Contact, Subscription, BulkInquiry, Legal } from './pages/StaticPages';
-import { ChatBot } from './components/ChatBot';
 
 const Footer = () => (
   <footer className="bg-stone-900 text-white py-12 mt-auto">
@@ -82,7 +81,6 @@ function App() {
             <AnimatedRoutes />
           </main>
           <Footer />
-          <ChatBot />
         </div>
       </Router>
     </ShopProvider>
