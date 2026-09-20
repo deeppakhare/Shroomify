@@ -32,10 +32,7 @@ export const Cart: React.FC = () => {
                 </div>
                 <div className="ml-4 flex-1 flex flex-col">
                   <div>
-                    <div className="flex justify-between text-base font-medium text-gray-900">
-                      <h3><Link to={`/product/${item.id}`}>{item.name}</Link></h3>
-                      <p className="ml-4">₹{item.price * item.quantity}</p>
-                    </div>
+                   
                     <p className="mt-1 text-sm text-gray-500">{item.category}</p>
                   </div>
                   <div className="flex-1 flex items-end justify-between text-sm">
