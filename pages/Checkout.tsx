@@ -59,25 +59,7 @@ export const Checkout: React.FC = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                   
                   {/* Shipping Address */}
-                  <div>
-                      <h2 className="text-lg font-medium text-gray-900 mb-4 border-b pb-2">1. Delivery Address</h2>
-                      <div className="space-y-4">
-                          <div>
-                              <label className="block text-sm font-medium text-gray-700">Full Address</label>
-                              <textarea name="address" rows={3} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-green-500 focus:border-green-500" value={formData.address} onChange={handleInputChange} placeholder="Flat No, Building, Street"></textarea>
-                          </div>
-                          <div className="grid grid-cols-2 gap-4">
-                               <div>
-                                  <label className="block text-sm font-medium text-gray-700">City</label>
-                                  <input type="text" name="city" value={formData.city} readOnly className="mt-1 block w-full bg-gray-100 border border-gray-300 rounded-md shadow-sm p-2 text-gray-500" />
-                               </div>
-                               <div>
-                                  <label className="block text-sm font-medium text-gray-700">Pincode</label>
-                                  <input type="text" name="zip" required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-green-500 focus:border-green-500" value={formData.zip} onChange={handleInputChange} />
-                               </div>
-                          </div>
-                      </div>
-                  </div>
+                 
 
                   {/* Delivery Slot */}
                   <div>
